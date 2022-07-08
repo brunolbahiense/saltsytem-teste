@@ -10,8 +10,10 @@ const postForm = async (req, res) =>{
         info,
         age
     } = req.body
+
+    if(!name || !email) return res.status(400).json('🔴 Os campos NOME e EMAIL são obrigatórios!')
     
-    const usuario = new User({
+    const newUser = new User({
         name,
         email,
         stack,
@@ -24,16 +26,14 @@ const postForm = async (req, res) =>{
     const userJSON = JSON.parse(fileJSON)
 
     
-    userJSON.push(usuario)
+    userJSON.push(newUser)
 
     const usersJSON = JSON.stringify(userJSON)
     await fs.writeFile('users.json', usersJSON) 
 
 
-    const save = await usuario.save()
+    const save = await newUser.save()
     return res.json(save)
 }
 
-module.exports ={
-    postForm,
-}
+module.exports = { postForm }
