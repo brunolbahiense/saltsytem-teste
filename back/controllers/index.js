@@ -33,7 +33,7 @@ const postForm = async (req, res) =>{
 
 
     const save = await newUser.save()
-    return res.json(save)
+    return res.json('Usuario cadastrado com sucesso ✅')
 }
 
 module.exports = { postForm }
